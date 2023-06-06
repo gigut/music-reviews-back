@@ -13,7 +13,7 @@ import { UserController, PostController } from "./controllers/index.js";
 
 mongoose
   .connect(
-    process.env.MONGODB_URL
+    process.env.MONGODB_URI
   )
   .then(() => console.log("Ok"))
   .catch((err) => console.log("Error", err));
@@ -73,7 +73,7 @@ app.patch(
   PostController.update
 );
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
     return console.log(err);
   }
