@@ -13,7 +13,7 @@ import { UserController, PostController } from "./controllers/index.js";
 
 mongoose
   .connect(
-    process.env.MONGODB_URI
+    process.env.MONGODB_URL
   )
   .then(() => console.log("Ok"))
   .catch((err) => console.log("Error", err));
