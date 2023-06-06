@@ -1,20 +1,18 @@
 import express, { json } from "express";
 import multer from "multer";
 import mongoose from "mongoose";
-import cors from 'cors';
+import cors from "cors";
 import {
   loginValidation,
   postCreateValidation,
   registerValidation,
 } from "./validations.js";
 
-import { handleValidationErrors, checkAuth } from './utils/index.js';
+import { handleValidationErrors, checkAuth } from "./utils/index.js";
 import { UserController, PostController } from "./controllers/index.js";
 
 mongoose
-  .connect(
-    process.env.MONGODB_URL
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("Ok"))
   .catch((err) => console.log("Error", err));
 
@@ -31,7 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
 app.post(
@@ -73,7 +71,7 @@ app.patch(
   PostController.update
 );
 
-app.listen(process.env.PORT || 4444, (err) => {
+app.listen(process.env.PORT || 4444 , (err) => {
   if (err) {
     return console.log(err);
   }
